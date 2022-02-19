@@ -8,7 +8,7 @@
      organization = "arc-test"
 
      workspaces {
-       prefix = "web-app-"
+       prefix = "aws-ec2-example-"
      }
    }
  }

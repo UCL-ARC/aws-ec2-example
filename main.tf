@@ -18,7 +18,7 @@ provider "aws" {
 locals {
   # If your backend is not Terraform Cloud, the value is ${terraform.workspace}
   # otherwise the value retrieved is that of the TFC_WORKSPACE_NAME with trimprefix
-  workspace = var.TFC_WORKSPACE_NAME != "" ? trimprefix("${var.TFC_WORKSPACE_NAME}", "web-app-") : "${terraform.workspace}"
+  workspace = var.TFC_WORKSPACE_NAME != "" ? trimprefix("${var.TFC_WORKSPACE_NAME}", "aws-ec2-example-") : "${terraform.workspace}"
   env       = var.env[local.workspace]
 }
 

@@ -7,9 +7,10 @@ Creates one or more web servers across AZs in a region. Web servers can be acces
 
 ## Usage
 
-1. If using Terraform Cloud (TFC), create workspace and attach to (fork of) this GitHub repo.
+1. If using Terraform Cloud (TFC), create workspace named `aws-ec2-example-dev`, 
+   `aws-ec2-example-test` or `aws-ec2-example-prod` and attach to (fork of) this GitHub repo.
 2. Configure the required inputs as environment variables or create `*.auto.tfvars` file.
-3. Rename `backend.tf.example` to `backend.tf` and configure for backend/workspace.
+3. Rename `backend.tf.example` to `backend.tf` and configure for your workspace/backend.
 4. Push changes to branch associated with workspace.
 5. Plan and Apply Terraform configuration.
 
