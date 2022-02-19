@@ -12,9 +12,9 @@ data "aws_iam_policy_document" "ec2_assume_role" {
 
 # Configure IAM role for admin.
 resource "aws_iam_role" "ec2_admin" {
-  name                = local.ssm_admin_name
-  path                = "/"
-  assume_role_policy  = data.aws_iam_policy_document.ec2_assume_role.json
+  name               = local.ssm_admin_name
+  path               = "/"
+  assume_role_policy = data.aws_iam_policy_document.ec2_assume_role.json
 }
 
 # Configure IAM instance profile.

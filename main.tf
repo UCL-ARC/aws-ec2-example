@@ -19,15 +19,15 @@ locals {
   # If your backend is not Terraform Cloud, the value is ${terraform.workspace}
   # otherwise the value retrieved is that of the TFC_WORKSPACE_NAME with trimprefix
   workspace = var.TFC_WORKSPACE_NAME != "" ? trimprefix("${var.TFC_WORKSPACE_NAME}", "web-app-") : "${terraform.workspace}"
-  env  = var.env[local.workspace]
+  env       = var.env[local.workspace]
 }
 
 # Configure ec2-admin role and ssm-user IAM user.
 module "iam" {
-    source = "./iam"
+  source = "./iam"
 
-    solution_name   = var.solution_name
-    env             = local.env
+  solution_name = var.solution_name
+  env           = local.env
 }
 
 # Create the VPC from a given CIDR and name.
@@ -36,27 +36,27 @@ module "iam" {
 # Be aware that VPC endpoints are created for SSM, SSM messages and EC2 messages to keep 
 # all SSM traffic within the AWS network.
 module "vpc" {
-    source          = "./vpc"
-    base_cidr_block = var.vpc_cidr_block
-    solution_name   = "${var.solution_name}-${local.env}"
-    region          = var.region
+  source          = "./vpc"
+  base_cidr_block = var.vpc_cidr_block
+  solution_name   = "${var.solution_name}-${local.env}"
+  region          = var.region
 }
 
 # Build one or more nginx web servers and attach SSM IAM profile.
 module "web-servers" {
-    source = "./web"
+  source = "./web"
 
-    machine_count = var.num_web_servers
+  machine_count = var.num_web_servers
 
-    instance_name = "${var.solution_name}-web-${local.env}"
-    instance_type = var.instance_type
+  instance_name = "${var.solution_name}-web-${local.env}"
+  instance_type = var.instance_type
 
-    web_subnet_ids   = module.vpc.web_subnet_ids
-    ssm-iam-profile  = module.iam.ssm-iam-profile
+  web_subnet_ids  = module.vpc.web_subnet_ids
+  ssm-iam-profile = module.iam.ssm-iam-profile
 
-    security_group_id = aws_security_group.web_sg.id
+  security_group_id = aws_security_group.web_sg.id
 
-    depends_on = [ module.vpc ]
+  depends_on = [module.vpc]
 }
 
 # Attach an elastic load balancer (ELB) to public subnets and 

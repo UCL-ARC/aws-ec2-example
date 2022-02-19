@@ -3,14 +3,14 @@ variable "region" {
   default     = "eu-west-2"
 }
 
-variable env {
-    description = "Environment"
-    type        = map(string)
-    default = {
-        dev = "dev"
-        test = "test"
-        prod = "prod"
-    }
+variable "env" {
+  description = "Environment"
+  type        = map(string)
+  default = {
+    dev  = "dev"
+    test = "test"
+    prod = "prod"
+  }
 }
 
 # Terraform workspace name for interoperability with Terraform Cloud and
@@ -21,7 +21,7 @@ variable env {
 # 'web-app-dev' will be the tagged as 'dev'. If using the Terraform CLI in 
 # workspace 'dev', the environment will be 'dev'.
 variable "TFC_WORKSPACE_NAME" {
-  type = string
+  type    = string
   default = ""
 }
 
@@ -34,7 +34,7 @@ variable "instance_type" {
 variable "num_web_servers" {
   description = "Number of web servers to provision"
   type        = number
-  default     = 1 
+  default     = 1
 }
 
 ### REQUIRED INPUTS ###

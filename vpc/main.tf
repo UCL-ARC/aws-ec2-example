@@ -33,18 +33,18 @@ module "vpc" {
   cidr = module.subnet_addrs.base_cidr_block
 
   # Create subnets across two AZs in the desired region.
-  azs             = ["${var.region}a", "${var.region}b"]
+  azs = ["${var.region}a", "${var.region}b"]
 
   # Create NATed private subnets.
-  private_subnets = [ 
-                      module.subnet_addrs.network_cidr_blocks["private1"],
-                      module.subnet_addrs.network_cidr_blocks["private2"]
-                    ]
-  
-  public_subnets =  [ 
-                      module.subnet_addrs.network_cidr_blocks["public1"],
-                      module.subnet_addrs.network_cidr_blocks["public2"]
-                    ]
+  private_subnets = [
+    module.subnet_addrs.network_cidr_blocks["private1"],
+    module.subnet_addrs.network_cidr_blocks["private2"]
+  ]
+
+  public_subnets = [
+    module.subnet_addrs.network_cidr_blocks["public1"],
+    module.subnet_addrs.network_cidr_blocks["public2"]
+  ]
 
   # Enable NATing.
   enable_nat_gateway = true
@@ -57,14 +57,14 @@ module "vpc" {
   enable_dns_support   = true
 
   vpc_tags = {
-      Name = var.solution_name
+    Name = var.solution_name
   }
 }
 
 # Endpoints for SSM over PrivateLink.
 # Three endpoints are needed for SSM: SSM, SSM messages and EC2 messages.
 module "vpc_endpoints" {
-  source = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
+  source  = "terraform-aws-modules/vpc/aws//modules/vpc-endpoints"
   version = "3.11.3"
 
   vpc_id             = module.vpc.vpc_id

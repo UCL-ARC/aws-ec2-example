@@ -5,6 +5,6 @@ resource "aws_iam_user" "ssm_user" {
   force_destroy = true
 
   tags = {
-    "Name" =  local.ssm_user_name
+    "Name" = local.ssm_user_name
   }
 }

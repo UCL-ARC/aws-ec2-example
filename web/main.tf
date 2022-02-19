@@ -14,14 +14,14 @@ data "aws_ami" "amazon" {
 # subnets.
 resource "aws_instance" "amazon" {
 
-  count  = var.machine_count
+  count = var.machine_count
 
-  subnet_id     = "${element(var.web_subnet_ids, count.index)}"
+  subnet_id     = element(var.web_subnet_ids, count.index)
   ami           = data.aws_ami.amazon.id
   instance_type = var.instance_type
 
   # Attach SSM IAM profile.
-  iam_instance_profile   = var.ssm-iam-profile
+  iam_instance_profile = var.ssm-iam-profile
 
   vpc_security_group_ids = [var.security_group_id]
 

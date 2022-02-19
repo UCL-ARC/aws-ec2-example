@@ -13,7 +13,7 @@ variable "web_subnet_ids" {
 
 variable "ssm-iam-profile" {
   description = "Name of SSM IAM profile"
-  type         = string
+  type        = string
 }
 
 variable "security_group_id" {
@@ -23,5 +23,5 @@ variable "security_group_id" {
 variable "machine_count" {
   description = "Number of web servers to provision"
   type        = number
-  default     = 1 
+  default     = 1
 }
