@@ -1,0 +1,14 @@
+# Setup terraform cloud backend storage and workspace.
+#
+# If you change the workspace prefix, you must update trimprefix in 
+# locals.workspace (main.tf).
+ terraform {
+   backend "remote" {
+     hostname     = "app.terraform.io"
+     organization = "arc-test"
+
+     workspaces {
+       prefix = "web-app-"
+     }
+   }
+ }
